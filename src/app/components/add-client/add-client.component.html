@@ -1,0 +1,56 @@
+
+  <div class="row">
+    <div class="col-md-6">
+      <h2>New Client</h2>
+    </div>
+    <div class="col-md-6 text-right">
+      <a routerLink="/clients" class="btn btn-link">
+        <i class="fa fa-arrow-left"></i> Back to list
+      </a>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+     <form [(ngModel)]="getImage" #f="ngForm" (submit)="persistClient(f)">
+      
+      <img [src]="previewImage" width="100px" height="80px" alt="">
+
+      <input (change)="showImage($event)" type="file" name="image" id="image">
+
+      <div class="form-group">
+        <label for="Name">Name</label>
+        <input autocomplete="off" required minlength="3" maxlength="10"  pattern="[a-zA-Z0-9 ]*" #fullName="ngModel" (change)="log(fullName)" [(ngModel)]="myClient.name" type="text" name="Name" id="Name" class="form-control" placeholder="" aria-describedby="helpId">
+          <div class="alert alert-danger" *ngIf="fullName.invalid && fullName.touched">
+               
+               <div *ngIf="fullName.errors.required">This field is Required !!</div>
+               <div *ngIf="fullName.errors.minlength">This field should be great than 3 caracters !!</div>
+               <div *ngIf="fullName.errors.email">This field is not email !!</div>
+               <div *ngIf="fullName.errors.pattern">This field is not respect our pattern !!</div>
+          </div>
+      </div>
+
+      <div class="form-group">
+          <label for="Phone">Phone</label>
+          <input [(ngModel)]="myClient.phone" type="text" name="Phone" id="Phone" class="form-control" placeholder="" aria-describedby="helpId">
+          <small id="helpId" class="text-muted">Help text</small>
+        </div>
+
+        <div class="form-group">
+            <label for="Email">Email</label>
+            <input [(ngModel)]="myClient.email" type="text" name="Email" id="Email" class="form-control" placeholder="" aria-describedby="helpId">
+            <small id="helpId" class="text-muted">Help text</small>
+          </div>
+
+          <div class="form-group">
+              <label for="Balance">Balance</label>
+              <input [(ngModel)]="myClient.balance" type="text" name="Balance" id="Balance" class="form-control" placeholder="" aria-describedby="helpId">
+              <small id="helpId" class="text-muted">Help text</small>
+            </div>
+         
+       <button class="btn btn-block btn-danger" [disabled]="f.invalid">
+         <i class="fa fa-send"></i> Save
+        </button>
+      </form>
+    </div>
+  </div>
